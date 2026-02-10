@@ -141,23 +141,22 @@ func Start(port int) {
 		enableCors(&w)
 		filePath := r.URL.Query().Get("path")
 
-		// Validation: Path must not be empty
 		if filePath == "" {
+			fmt.Printf("[Video] Error: Empty path\n")
 			http.Error(w, "Invalid path", 400)
 			return
 		}
 
-		// On Windows, paths start with a drive letter (e.g. C:\)
-		// On Linux, they start with /
-		// We just need to check if the file exists for safety
+		// Clean and verify path
+		filePath = filepath.Clean(filePath)
 		if _, err := os.Stat(filePath); os.IsNotExist(err) {
+			fmt.Printf("[Video] Error: File not found -> %s\n", filePath)
 			http.Error(w, "File not found", 404)
 			return
 		}
 
-		// Always signal we accept ranges (critical for Chromecast/seeking)
+		fmt.Printf("[Video] Streaming: %s\n", filePath)
 		w.Header().Set("Accept-Ranges", "bytes")
-
 		http.ServeFile(w, r, filePath)
 	})
 

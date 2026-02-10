@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"math"
 	"path/filepath"
 	"strings"
 	"time"
@@ -79,9 +80,5 @@ func GetCurrentPlaying(channelID string) *PlayingStatus {
 }
 
 func mod(a, b float64) float64 {
-	res := a
-	for res >= b {
-		res -= b
-	}
-	return res
+	return math.Mod(a, b)
 }
