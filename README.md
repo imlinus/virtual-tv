@@ -18,21 +18,11 @@ Transform your local media collection into a personal cable TV experience. One s
 3. The app will appear in your **System Tray**.
 4. Right-click the tray icon and select **Open Virtual TV** or go to `http://<YOUR-IP>:9210`.
 
-## Chromecast Setup (Critical)
-
-Browsers block storage on local IP addresses. To use Chromecast, you must trust your server's IP:
-
-1. Open Chrome/Edge and go to: `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
-2. Add your server's network address (e.g., `http://192.168.1.50:9210`).
-3. Set the dropdown to **Enabled** and **Relaunch**.
-
-*Note: Access the TV via your Network IP (found in the tray menu) when you want to cast.*
-
 ## Reverse Proxy & Authentication
 
 Virtual TV is designed to be simple and lightweight. Out of the box, it serves content directly on port 9210. 
 
-If you want to expose this to the internet with **SSL (HTTPS)**, **Custom Domains**, or **Basic Auth**, I highly recommend using a reverse proxy like [Caddy](https://caddyserver.com/). It handles SSL automatically and is very easy to configure.
+If you want to expose this to the internet with **SSL (HTTPS)**, **Custom Domains**, or **Basic Auth**, I highly recommend using aq reverse proxy like [Caddy](https://caddyserver.com/). It handles SSL automatically and is very easy to configure.
 
 Example `Caddyfile`:
 ```css
@@ -40,3 +30,15 @@ tv.yourdomain.com {
     reverse_proxy localhost:9210
 }
 ```
+
+
+## Chromecast Setup (Critical)
+
+If you don't use a reverse proxy, and opt for the http protocol, then you have to enable unsafe origins in your browser. Browsers block storage on local IP addresses. To use Chromecast, you must trust your computers IP:
+
+1. Open Chrome/Edge and go to: `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
+2. Add your server's network address (e.g., `http://192.168.1.50:9210`).
+3. Set the dropdown to **Enabled** and **Relaunch**.
+
+*Note: Access the TV via your Network IP (found in the tray menu) when you want to cast.*
+
