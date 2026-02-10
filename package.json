@@ -1,0 +1,38 @@
+{
+  "name": "virtual-tv",
+  "version": "0.1.0",
+  "description": "Personal Cable TV Station",
+  "main": "src/electron/main.js",
+  "bin": {
+    "virtual-tv": "src/backend/server.js"
+  },
+  "scripts": {
+    "start": "electron . --disable-gpu --ozone-platform-hint=x11",
+    "cli": "node src/backend/server.js",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^36.0.0",
+    "electron-builder": "^26.7.0"
+  },
+  "build": {
+    "appId": "com.virtualtv.app",
+    "productName": "Virtual TV",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}
