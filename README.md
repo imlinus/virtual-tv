@@ -28,3 +28,15 @@ Browsers block storage on local IP addresses. To use Chromecast, you must trust 
 
 *Note: Access the TV via your Network IP (found in the tray menu) when you want to cast.*
 
+## Reverse Proxy & Authentication
+
+Virtual TV is designed to be simple and lightweight. Out of the box, it serves content directly on port 9210. 
+
+If you want to expose this to the internet with **SSL (HTTPS)**, **Custom Domains**, or **Basic Auth**, I highly recommend using a reverse proxy like [Caddy](https://caddyserver.com/). It handles SSL automatically and is very easy to configure.
+
+Example `Caddyfile`:
+```css
+tv.yourdomain.com {
+    reverse_proxy localhost:9210
+}
+```
