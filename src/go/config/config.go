@@ -22,7 +22,7 @@ type Library struct {
 	Episodes []Episode `json:"episodes"`
 }
 
-const Version = "0.2.0"
+const Version = "0.2.2"
 const DataDir = "data"
 const ChannelsFile = "data/channels.json"
 const LibraryFile = "data/library.json"

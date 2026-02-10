@@ -2,8 +2,11 @@ package main
 
 import (
 	_ "embed"
+	"flag"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 	"virtual-tv/src/go/config"
 	"virtual-tv/src/go/scanner"
 	"virtual-tv/src/go/server"
@@ -23,7 +26,22 @@ var iconIco []byte
 func main() {
 	config.EnsureDataDir()
 
+	headless := flag.Bool("headless", false, "Run in headless mode (server only, no tray)")
+	flag.Parse()
+
 	fmt.Printf("Virtual TV v%s\n", config.Version)
+
+	if *headless {
+		fmt.Println("Running in headless mode...")
+		go server.Start(9210)
+
+		// Wait for interrupt
+		stop := make(chan os.Signal, 1)
+		signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+		<-stop
+		fmt.Println("\nShutting down...")
+		return
+	}
 
 	// Start server in background
 	go server.Start(9210)

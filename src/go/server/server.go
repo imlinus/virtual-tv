@@ -165,9 +165,8 @@ func Start(port int) {
 	mux.Handle("/", http.FileServer(http.FS(fe)))
 
 	ip := GetLocalIP()
-	fmt.Printf("\n📺 Virtual TV is live!\n")
-	fmt.Printf("🚀 Local:   http://localhost:%d\n", port)
-	fmt.Printf("📡 Network: http://%s:%d\n\n", ip, port)
+	fmt.Printf("\nVirtual TV is live!\n")
+	fmt.Printf("Go to website: http://%s:%d\n\n", ip, port)
 
 	http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
 }
