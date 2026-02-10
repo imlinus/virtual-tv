@@ -1,8 +1,8 @@
 /* Base */
 :root {
   --bg: #0d0d12;
-  --accent: #e50914;
-  --accent-glow: rgba(229, 9, 20, 0.4);
+  --accent: #a855f7;
+  --accent-glow: rgba(168, 85, 247, 0.4);
   --surface: rgba(255, 255, 255, 0.03);
   --surface-hover: rgba(255, 255, 255, 0.08);
   --text: #ffffff;
