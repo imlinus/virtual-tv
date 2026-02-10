@@ -1,15 +1,13 @@
-# Virtual TV 📺
+# Virtual TV
 
 Transform your local media collection into a personal cable TV experience. No more infinite scrolling—just pick a channel and watch what's on, perfectly synced for everyone.
 
-## ✨ Features
+## Features
 
 - **Synced Global Playback**: Everyone watching the same channel sees the same frame, just like real TV.
 - **Premium TV Interface**: A sleek, dark-themed UI featuring glassmorphism, smooth animations, and a channel carousel.
 - **Chromecast Support**: Beam your channels to the big screen with full metadata and progress syncing.
 - **Browser-Based Management**: Effortlessly create channels using the built-in visual folder browser—no path-typing required.
-- **Tray Mode (Mom Approved)**: Runs discreetly in the system tray for a native desktop feel.
-- **Developer Ready**: Clean code, zero bloat, and a powerful CLI mode.
 
 ## Quick Start (CLI Mode)
 
