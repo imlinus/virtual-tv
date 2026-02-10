@@ -14,10 +14,10 @@ import (
 	"github.com/pkg/browser"
 )
 
-//go:embed assets/icon-red.png
+//go:embed assets/icon-dot.png
 var iconPng []byte
 
-//go:embed assets/icon-red.ico
+//go:embed assets/icon-dot.ico
 var iconIco []byte
 
 func main() {
