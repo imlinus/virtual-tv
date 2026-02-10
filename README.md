@@ -2,8 +2,6 @@
 
 Transform your local media collection into a personal cable TV experience. One standalone binary, zero dependencies, synced global playback, and simple tray controls.
 
-![Web App Interface](assets/web-app.png)
-
 ## Features
 
 - **Synced Global Playback**: Everyone on your network sees the same frame, just like real TV.
@@ -40,7 +38,7 @@ tv.yourdomain.com {
 ![Features Showcase](assets/features-showcase.png)
 
 
-## Chromecast Setup (Critical)
+## Chromecast Setup
 
 If you don't use a reverse proxy, and opt for the http protocol, then you have to enable unsafe origins in your browser. Browsers block storage on local IP addresses. To use Chromecast, you must trust your computers IP:
 
