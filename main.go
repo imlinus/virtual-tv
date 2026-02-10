@@ -57,9 +57,9 @@ func onReady() {
 		for {
 			select {
 			case <-mOpen.ClickedCh:
-				browser.OpenURL("http://localhost:9210")
+				browser.OpenURL(fmt.Sprintf("http://%s:9210", ip))
 			case <-mManage.ClickedCh:
-				browser.OpenURL("http://localhost:9210/?manage=true")
+				browser.OpenURL(fmt.Sprintf("http://%s:9210/?manage=true", ip))
 			case <-mScan.ClickedCh:
 				channels := config.ReadChannels()
 				var allShows []string
