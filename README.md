@@ -1,4 +1,4 @@
-# Virtual TV v0.2.0
+# Virtual TV v0.2.1
 
 Transform your local media collection into a personal cable TV experience. One standalone binary, zero dependencies, synced global playback, and simple tray controls.
 

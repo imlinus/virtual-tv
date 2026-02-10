@@ -8,12 +8,17 @@ import (
 	"virtual-tv/src/go/scanner"
 	"virtual-tv/src/go/server"
 
+	"runtime"
+
 	"github.com/getlantern/systray"
 	"github.com/pkg/browser"
 )
 
 //go:embed assets/icon.png
-var iconData []byte
+var iconPng []byte
+
+//go:embed assets/icon.ico
+var iconIco []byte
 
 func main() {
 	config.EnsureDataDir()
@@ -29,7 +34,12 @@ func main() {
 
 func onReady() {
 	ip := server.GetLocalIP()
-	systray.SetIcon(iconData)
+
+	if runtime.GOOS == "windows" {
+		systray.SetIcon(iconIco)
+	} else {
+		systray.SetIcon(iconPng)
+	}
 	systray.SetTitle("Virtual TV")
 	systray.SetTooltip(fmt.Sprintf("Virtual TV v%s (%s)", config.Version, ip))
 
