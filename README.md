@@ -1,15 +1,13 @@
-# Virtual TV v0.2.1
+# Virtual TV v0.2.2
 
-Transform your local media collection into a personal cable TV experience. One standalone binary, zero dependencies, synced global playback, and simple tray controls.
+Transform your local media collection into a endless randomized stream so it
+feels like watching TV from the 90s/00s.
 
 ## Features
 
 - **Synced Global Playback**: Everyone on your network sees the same frame, just like real TV.
-- **Premium TV Interface**: Sleek dark UI with glassmorphism and a channel carousel.
 - **Chromecast Support**: Beam channels to your TV with full progress syncing.
-- **Visual Folder Browser**: Manage channels effortlessly through the web UI.
-- **Tray Mode**: Discreet system tray icon for quick access and status.
-- **Admin Protection**: Management buttons are automatically hidden for non-admin users.
+- **Simple management**: Manage channels effortlessly through the web UI.
 
 ## Quick Start
 
