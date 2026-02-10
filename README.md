@@ -1,6 +1,8 @@
 # Virtual TV v0.2.0
 
-Transform your local media collection into a personal cable TV experience. One standalone binary, zero dependencies. synced global playback, and simple tray controls.
+Transform your local media collection into a personal cable TV experience. One standalone binary, zero dependencies, synced global playback, and simple tray controls.
+
+![Web App Interface](assets/web-app.png)
 
 ## Features
 
@@ -10,6 +12,14 @@ Transform your local media collection into a personal cable TV experience. One s
 - **Visual Folder Browser**: Manage channels effortlessly through the web UI.
 - **Tray Mode**: Discreet system tray icon for quick access and status.
 - **Admin Protection**: Management buttons are automatically hidden for non-admin users.
+
+### Visual Management
+![Add Channel](assets/add-channel.png)
+*Manage your library with a simple, visual folder browser.*
+
+### System Tray Controls
+![Tray App](assets/tray-app.png)
+*Runs in the background with convenient tray controls.*
 
 ## Quick Start
 
@@ -22,7 +32,7 @@ Transform your local media collection into a personal cable TV experience. One s
 
 Virtual TV is designed to be simple and lightweight. Out of the box, it serves content directly on port 9210. 
 
-If you want to expose this to the internet with **SSL (HTTPS)**, **Custom Domains**, or **Basic Auth**, I highly recommend using aq reverse proxy like [Caddy](https://caddyserver.com/). It handles SSL automatically and is very easy to configure.
+If you want to expose this to the internet with **SSL (HTTPS)**, **Custom Domains**, or **Basic Auth**, I highly recommend using a reverse proxy like [Caddy](https://caddyserver.com/). It handles SSL automatically and is very easy to configure.
 
 Example `Caddyfile`:
 ```css
@@ -30,7 +40,6 @@ tv.yourdomain.com {
     reverse_proxy localhost:9210
 }
 ```
-
 
 ## Chromecast Setup (Critical)
 
@@ -41,4 +50,3 @@ If you don't use a reverse proxy, and opt for the http protocol, then you have t
 3. Set the dropdown to **Enabled** and **Relaunch**.
 
 *Note: Access the TV via your Network IP (found in the tray menu) when you want to cast.*
-
