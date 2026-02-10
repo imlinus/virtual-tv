@@ -13,8 +13,6 @@ Transform your local media collection into a personal cable TV experience. One s
 - **Tray Mode**: Discreet system tray icon for quick access and status.
 - **Admin Protection**: Management buttons are automatically hidden for non-admin users.
 
-![Features Showcase](assets/features-showcase.png)
-
 ## Quick Start
 
 1. Download the binary for your platform (`virtual-tv` or `virtual-tv.exe`).
@@ -34,6 +32,13 @@ tv.yourdomain.com {
     reverse_proxy localhost:9210
 }
 ```
+
+## Screenshots
+
+![Web App Interface](assets/web-app.png)
+
+![Features Showcase](assets/features-showcase.png)
+
 
 ## Chromecast Setup (Critical)
 
