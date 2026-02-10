@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual TV - Your Personal Channel</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Google Cast SDK -->
+  <script>
+    window['__onGCastApiAvailable'] = function(isAvailable, errorReason) {
+      if (isAvailable && window.cast && cast.framework) {
+        try {
+            const context = cast.framework.CastContext.getInstance();
+            context.setOptions({
+              receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+              autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+            });
+            console.log('[Cast] Initialized successfully');
+            window.castReady = true;
+        } catch(e) { 
+          console.error('[Cast] Initialization Error:', e.message);
+          window.castError = e.message;
+        }
+      } else {
+        console.error('[Cast] SDK not available:', errorReason);
+        window.castError = errorReason || 'Failed to load framework';
+      }
+    };
+  </script>
+  <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="app">
+    <div class="tv-container" id="tv-container">
+      <video id="tv-player" autoplay muted playsinline></video>
+      
+      <div class="tv-overlay" id="tv-overlay">
+        <!-- Top Controls -->
+        <div class="controls-top">
+          <button class="btn-icon" id="mute-btn" title="Mute/Unmute">
+             <i class="ph-bold ph-speaker-high" id="mute-icon"></i>
+          </button>
+          <button class="btn-icon" id="manage-btn" title="Manage Channels">
+             <i class="ph-bold ph-gear"></i>
+          </button>
+          <button class="btn-icon" id="cast-btn" title="Chromecast">
+             <i class="ph-bold ph-screencast"></i>
+          </button>
+        </div>
+
+        <!-- Info Section -->
+        <div class="show-info">
+          <div class="live-badge">LIVE</div>
+          <h1 id="episode-name">Select a Channel</h1>
+          <p id="show-name">No show playing</p>
+          <p class="channel-label" id="channel-name-label"></p>
+        </div>
+
+        <!-- Channels Carousel -->
+        <div class="channels-section">
+          <p class="section-title">TV CHANNELS</p>
+          <div class="channels-list" id="channel-list">
+            <!-- Channels injected here -->
+          </div>
+        </div>
+
+        <!-- Progress Bar at the very bottom -->
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for management -->
+    <div id="manage-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Manage Channels</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="manage-channel-list" class="manage-list"></div>
+          <div class="add-channel-form">
+            <h3>Add New Channel</h3>
+            <div class="form-group">
+              <input type="text" id="new-channel-name" placeholder="Channel Name">
+            </div>
+            
+            <div class="folder-picker">
+              <input type="text" id="new-channel-folder" placeholder="Folder Path">
+              <button id="browse-btn" class="c-button is-secondary">Browse</button>
+            </div>
+            
+            <div id="folder-browser" class="folder-browser"></div>
+            
+            <button id="save-channel-btn" class="c-button is-primary">Create Channel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
