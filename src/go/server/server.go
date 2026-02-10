@@ -85,9 +85,31 @@ func Start(port int) {
 	mux.HandleFunc("/api/browse", func(w http.ResponseWriter, r *http.Request) {
 		enableCors(&w)
 		browsePath := r.URL.Query().Get("path")
+
+		// On Windows, if path is empty, list drives
+		if browsePath == "" && os.PathSeparator == '\\' {
+			drives := []map[string]string{}
+			for _, drive := range "ABCDEFGHIJKLMNOPQRSTUVWXYZ" {
+				dPath := string(drive) + ":\\"
+				if _, err := os.Stat(dPath); err == nil {
+					drives = append(drives, map[string]string{
+						"name": dPath,
+						"path": dPath,
+					})
+				}
+			}
+			json.NewEncoder(w).Encode(map[string]interface{}{
+				"current":     "",
+				"parent":      "",
+				"directories": drives,
+			})
+			return
+		}
+
 		if browsePath == "" {
 			browsePath = "/"
 		}
+
 		files, err := os.ReadDir(browsePath)
 		if err != nil {
 			http.Error(w, err.Error(), 500)
@@ -102,9 +124,15 @@ func Start(port int) {
 				})
 			}
 		}
+
+		parent := filepath.Dir(browsePath)
+		if parent == browsePath {
+			parent = "" // We are at root
+		}
+
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"current":     browsePath,
-			"parent":      filepath.Dir(browsePath),
+			"parent":      parent,
 			"directories": dirs,
 		})
 	})

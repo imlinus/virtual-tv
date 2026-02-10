@@ -1,6 +1,8 @@
 package logic
 
 import (
+	"path/filepath"
+	"strings"
 	"time"
 	"virtual-tv/src/go/config"
 )
@@ -31,8 +33,10 @@ func GetCurrentPlaying(channelID string) *PlayingStatus {
 	var pool []config.Episode
 	for _, ep := range library.Episodes {
 		for _, showPath := range channel.Shows {
-			// Check if episode path starts with showPath
-			if len(ep.Path) >= len(showPath) && ep.Path[:len(showPath)] == showPath {
+			// Normalize paths to use slashes for consistent comparison
+			epPath := filepath.ToSlash(ep.Path)
+			sURLPath := filepath.ToSlash(showPath)
+			if strings.HasPrefix(epPath, sURLPath) {
 				pool = append(pool, ep)
 				break
 			}

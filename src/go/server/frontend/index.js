@@ -204,7 +204,7 @@ function setupModal () {
   document.getElementById('browse-btn').onclick = () => browseFolder()
 }
 
-async function browseFolder (path = '/home/linus') {
+async function browseFolder (path = '') {
   const browser = document.getElementById('folder-browser')
   browser.classList.add('is-visible')
   
