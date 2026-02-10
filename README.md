@@ -16,6 +16,39 @@ feels like watching TV from the 90s/00s.
 3. The app will appear in your **System Tray**.
 4. Right-click the tray icon and select **Open Virtual TV** or go to `http://<YOUR-IP>:9210`.
 
+### Headless Mode (Server)
+
+If you are running on a Linux server without a desktop environment, use the `--headless` flag to run without the tray icon:
+
+```bash
+./virtual-tv --headless
+```
+
+### Linux Service (systemd)
+
+To keep Virtual TV running in the background on your server, create a service file:
+
+`/etc/systemd/system/virtual-tv.service`
+```ini
+[Unit]
+Description=Virtual TV Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/virtual-tv --headless
+WorkingDirectory=/home/youruser/virtual-tv
+User=youruser
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then run:
+```bash
+sudo systemctl enable --now virtual-tv
+```
+
 ## Reverse Proxy & Authentication
 
 Virtual TV is designed to be simple and lightweight. Out of the box, it serves content directly on port 9210. 
