@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"strings"
 	"virtual-tv/src/go/config"
 	"virtual-tv/src/go/logic"
 	"virtual-tv/src/go/scanner"
@@ -141,10 +140,24 @@ func Start(port int) {
 	mux.HandleFunc("/video", func(w http.ResponseWriter, r *http.Request) {
 		enableCors(&w)
 		filePath := r.URL.Query().Get("path")
-		if filePath == "" || !strings.HasPrefix(filePath, "/") {
+
+		// Validation: Path must not be empty
+		if filePath == "" {
 			http.Error(w, "Invalid path", 400)
 			return
 		}
+
+		// On Windows, paths start with a drive letter (e.g. C:\)
+		// On Linux, they start with /
+		// We just need to check if the file exists for safety
+		if _, err := os.Stat(filePath); os.IsNotExist(err) {
+			http.Error(w, "File not found", 404)
+			return
+		}
+
+		// Always signal we accept ranges (critical for Chromecast/seeking)
+		w.Header().Set("Accept-Ranges", "bytes")
+
 		http.ServeFile(w, r, filePath)
 	})
 
